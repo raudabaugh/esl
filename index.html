@@ -25,11 +25,12 @@
         src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
     </script>
     <script
-        src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js">
+        src="js/leaflet.ajax.min.js">
     </script>
 
-    <script>
-        var map = L.map('map').setView([39.758948, -84.191607], 14);
+    <script>     
+        var geojsonLayer = new L.GeoJSON.AJAX("./data/esl_map.geojson");
+        var map = L.map('map').fitBounds(geojsonLayer.getBounds());
         mapLink = 
             '<a href="http://openstreetmap.org">OpenStreetMap</a>';
         L.tileLayer(
@@ -37,8 +38,7 @@
             attribution: '&copy; ' + mapLink + ' Contributors',
             maxZoom: 18,
             }).addTo(map);
-        
-        var geojsonLayer = new L.GeoJSON.AJAX("./data/esl_map.geojson");
+
         geojsonLayer.addTo(map);
     </script>
 </body>
